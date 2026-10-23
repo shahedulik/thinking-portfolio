@@ -174,3 +174,5 @@ main { position: relative; z-index: 1; }
   .cue-arrow, .topbar .status::before { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }
+.portal-link { margin-left: auto; color: var(--highlight); border-bottom: 1px solid var(--steel-500); transition: border-color 0.3s; padding-bottom: 2px; }
+.portal-link:hover { border-color: var(--highlight); }
