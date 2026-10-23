@@ -1,97 +1,115 @@
 <!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>coder-app-name</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      /* 内联样式确保主题色立即生效，避免闪烁 */
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-      }
-      html.light,
-      html.light body {
-        background-color: #ffffff !important;
-        color: #000000;
-      }
-      html.dark,
-      html.dark body {
-        background-color: #1a1a1a !important;
-        color: #ffffff;
-      }
-    </style>
-    <script>
-      // 在 React 加载前立即设置主题，避免闪烁
-      (function () {
-        const isInIframe = window.self !== window.top;
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0e12" />
+  <!-- ✎ EDIT: your title & description -->
+  <title>Shahedul Islam Khan · A Reasoning Portfolio</title>
+  <meta name="description" content="Portfolio of Shahedul Islam Khan — business intelligence analyst and solution architect. Signals, evidence, decisions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
 
-        function applyThemeToDOM(theme) {
-          document.documentElement.classList.remove("light", "dark");
-          document.documentElement.classList.add(theme);
-          document.documentElement.setAttribute("data-theme", theme);
-        }
+  <!-- The computational mind (WebGL). Fallback canvas appears only if WebGL is unavailable. -->
+  <canvas id="mind" aria-hidden="true"></canvas>
+  <canvas id="mind-fallback" aria-hidden="true" hidden></canvas>
 
-        if (isInIframe) {
-          // 监听父窗口主动推送的主题消息
-          window.addEventListener("message", function (event) {
-            if (event.data && typeof event.data.theme === "string") {
-              const theme = event.data.theme;
-              if (theme === "light" || theme === "dark") {
-                applyThemeToDOM(theme);
-              }
-            }
-          });
-        } else {
-          // 非 iframe 环境，使用默认 light 主题
-          applyThemeToDOM("light");
-        }
-      })();
-    </script>
-      <script>
-      (function () {
-        if (window.self === window.top) return;
-        var reported = {};
-        window.addEventListener("error", function (event) {
-          // 资源加载失败的 error 事件没有 message，此处仅上报 JS 运行时错误
-          if (!event || !event.message) return;
-          var key =
-            event.message + "|" + (event.filename || "") + "|" + (event.lineno || 0);
-          if (reported[key]) return; // 相同错误只上报一次，避免渲染循环刷屏
-          reported[key] = true;
-          try {
-            window.parent.postMessage(
-              {
-                type: "sandbox-runtime-error",
-                payload: {
-                  message: String(event.message).slice(0, 500),
-                  filename: event.filename || "",
-                  lineno: event.lineno || 0,
-                  colno: event.colno || 0,
-                  stack:
-                    event.error && event.error.stack
-                      ? String(event.error.stack).slice(0, 2000)
-                      : ""
-                }
-              },
-              "*"
-            );
-          } catch (e) {
-            /* 上报失败不影响页面运行 */
-          }
-        });
-      })();
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <header class="topbar">
+    <!-- ✎ EDIT: your monogram / system tag -->
+    <span class="mono tag">sk·cognition/v2</span>
+    <span class="mono status" id="state-readout">state: initializing</span>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" data-formation="0">
+      <p class="mono kicker">&gt; trace.init(portfolio, 2026)</p>
+      <!-- ✎ EDIT: your name -->
+      <h1 class="display">Shahedul<br />Islam Khan</h1>
+      <!-- ✎ EDIT: your role -->
+      <p class="mono role">business intelligence analyst · solution architect</p>
+      <!-- ✎ EDIT: one-sentence positioning -->
+      <p class="lede">I build systems that read signals, weigh evidence, and show their reasoning — across procurement, pipelines, and product.</p>
+      <a class="mono cue" href="#about"><span class="cue-arrow">↓</span> descend</a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" data-formation="1">
+      <p class="mono label">/01 — about</p>
+      <h2 class="display h2">Plain language, direct answers.</h2>
+      <!-- ✎ EDIT: your story, first person, plain -->
+      <div class="prose">
+        <p>I am a business intelligence analyst and solution architect from Dhaka. I spend my days inside pipelines, procurement documents, and CRMs, listening for the signal buried in the noise.</p>
+        <p>I trained in data science at United International University. Since then I have written ninety-plus public-sector proposals, structured joint ventures across four markets, and founded three ventures of my own. I like work where an answer must survive contact with a decision-maker: a CFO, a contracting officer, a founder with one quarter of runway.</p>
+        <p>My method is simple. Gather the evidence. Weigh it in the open. Show the reasoning. A recommendation without a trace is only a guess.</p>
+      </div>
+      <p class="mono margin-note">confidence: high · sources: 6 mandates · 4 markets · 3 ventures</p>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section class="section" id="work" data-formation="2">
+      <p class="mono label">/02 — selected work</p>
+      <h2 class="display h2">Nodes in one thread.</h2>
+      <!-- ✎ EDIT: duplicate / rewrite <li class="node"> blocks for your projects -->
+      <ol class="thread">
+        <li class="node">
+          <span class="mono node-index">n/01</span>
+          <h3 class="display node-title">UPSKILL Consultancy NYC</h3>
+          <p class="node-body">Ninety-plus public-sector proposals, five joint ventures (VOSB & WOSB), and a client base thirty percent larger in sixty days. I built the proposal engine and the evidence behind it.</p>
+          <p class="mono node-tags">rfp-engine · jv-structuring · gtm-design</p>
+        </li>
+        <li class="node">
+          <span class="mono node-index">n/02</span>
+          <h3 class="display node-title">PREZIO Australia</h3>
+          <p class="node-body">PropTech pipeline across the AU market: discovery, valuation, negotiation. Monthly market-share targets exceeded by twenty percent, quarter after quarter.</p>
+          <p class="mono node-tags">proptech · negotiation · forecasting</p>
+        </li>
+        <li class="node">
+          <span class="mono node-index">n/03</span>
+          <h3 class="display node-title">Insight AI Consultancy</h3>
+          <p class="node-body">Enterprise LLM deployments and autonomous agents for workflow decisioning. I design the evaluation harness before I design the demo.</p>
+          <p class="mono node-tags">llm-agents · eval-harness · bi-transformation</p>
+        </li>
+        <li class="node">
+          <span class="mono node-index">n/04</span>
+          <h3 class="display node-title">Aetheria Alliance</h3>
+          <p class="node-body">Sensing and automation infrastructure for leather manufacturing. Hardware and model share one nervous system; accountability is measured, not claimed.</p>
+          <p class="mono node-tags">iot · sensing · automation</p>
+        </li>
+        <li class="node">
+          <span class="mono node-index">n/05</span>
+          <h3 class="display node-title">Oddlogy</h3>
+          <p class="node-body">A study partner for university courses, funded by the iDEA project of the Bangladesh Computer Council. Crash-course analytics and outreach that compounds.</p>
+          <p class="mono node-tags">edtech · growth · analytics</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact" data-formation="3">
+      <p class="mono label">/03 — contact</p>
+      <h2 class="display h2">Open a channel.</h2>
+      <!-- ✎ EDIT: your channels -->
+      <ul class="mono contact-list">
+        <li><span>email</span><a href="mailto:shahedulik6904@gmail.com">shahedulik6904@gmail.com</a></li>
+        <li><span>phone</span><a href="tel:+8801979071285">+880 1979-071285</a></li>
+        <li><span>base</span><span>Dhaka, Bangladesh · UTC+6</span></li>
+        <li><span>repos</span><a href="https://github.com/shahedulik" target="_blank" rel="noopener">github.com/shahedulik</a></li>
+      </ul>
+      <p class="mono footer-note">compiled with intent · © 2026 Shahedul Islam Khan</p>
+    </section>
+  </main>
+
+  <!-- React root (hidden — content is in the HTML above) -->
+  <div id="root" style="display:none"></div>
+
+  <!-- Three.js (UMD build, global THREE). If this fails to load, the site degrades to the static fallback. -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+  <script src="/script.js"></script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
